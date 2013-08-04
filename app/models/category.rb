@@ -6,10 +6,11 @@ class Category < ActiveRecord::Base
   validates :title, presence: true
 
   def self.list
-      where.not(title: "Kategorisiz")
+      where.not(title: ENV['UNCATEGORIZED'].dup)
   end
-    def self.uncategorized
-    find_by(title: "Kategorisiz")
+
+  def self.uncategorized
+      find_by(title: ENV['UNCATEGORIZED'].dup)
   end
 
 end

@@ -1,7 +1,20 @@
 require 'spec_helper'
 
 describe Article do
+  let(:category) { FactoryGirl.create(:category)}
+  before(:each) do
+    @attr = {
+      :title => "News",
+      :content => "It's a content having at least 10 characters.",
+      :category_id => category.id,
+      :publish_date => "2013-07-10 05:35:46",
+      :tag_list => "test1, test2"
+    }
+  end
 
+# VALIDATIONS
+it { should validate_presence_of(:title) }
+it { should validate_presence_of(:content) }
 
 describe "Attributes" do
 
@@ -12,40 +25,26 @@ describe "Attributes" do
 
 end
 
-describe "validations" do
-   let(:category) { FactoryGirl.create(:category)}
-  context "should pass valid data" do
+describe "has associations" do
+  it {should have_many(:pictures).through(:multimedia)}
+  it {should belong_to :category}
+end
 
-    let(:article) { FactoryGirl.create(:article, category: category)}
+describe "validations" do
+
+  context "should pass with valid data" do
+
+    let(:article) {Article.new(@attr)}
     subject { article }
 
     it { should be_valid}
 
   end
 
-  context "without valid title" do
-
-    let(:article) { Article.new(title: "")}
-    subject { article }
-
-    it { should_not be_valid}
-
-  end
-
-  context "without valid content" do
-
-    let(:article) { Article.new(title: "News", content: "")}
-    before { article.save}
-    subject { article }
-
-
-    it { should_not be_valid}
-
-  end
 
   context "without enough content" do
 
-    let(:article) { Article.new(title: "News", content: "#{"a"*29}")}
+    let(:article) { Article.new(@attr.merge(content: "#{"a"*9}"))}
     before { article.save}
     subject { article }
 
@@ -55,7 +54,7 @@ describe "validations" do
 
   context "without category_id" do
 
-    let(:article) { Article.new(title: "News", content: "#{"a"*10}", category_id: nil)}
+    let(:article) { Article.new(@attr.merge(category_id: nil))}
     before { article.save}
     subject { article }
 
