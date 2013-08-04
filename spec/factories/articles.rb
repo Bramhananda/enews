@@ -2,8 +2,10 @@
 
 FactoryGirl.define do
   factory :article do
-    title "MyString"
-    content "MyText"
+    title "News"
+    content "#{"a"*10}"
     publish_date "2013-07-10 05:35:46"
+    category
+    tag_list "test, test2"
   end
 end

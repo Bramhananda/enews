@@ -9,7 +9,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'rails_12factor', group: :production
 gem 'ckeditor_rails'
 gem 'will_paginate'
-gem 'awesome_nested_set'
+gem 'awesome_nested_set', :git=>"https://github.com/collectiveidea/awesome_nested_set.git"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk'
 group :doc do
@@ -29,6 +29,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 group :test do
   gem 'capybara'

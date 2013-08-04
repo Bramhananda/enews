@@ -2,39 +2,77 @@ require 'spec_helper'
 
 describe Article do
 
-  before(:each) do
-    @attr = {
-      :title=>"Cakma bir baslik",
-      :content =>"Burasi detay kısmı haberin...",
-      :publish_date =>Time.now
-    }
-
-  end
-
-  subject { Article.create(@attr) }
 
 describe "Attributes" do
 
+    it {should respond_to(:title)}
+    it {should respond_to(:content)}
+    it {should respond_to(:category_id)}
+    it {should accept_nested_attributes_for(:pictures)}
 
-  it  "should respond to title" do
+end
 
-        should respond_to(:title)
+describe "validations" do
+   let(:category) { FactoryGirl.create(:category)}
+  context "should pass valid data" do
+
+    let(:article) { FactoryGirl.create(:article, category: category)}
+    subject { article }
+
+    it { should be_valid}
 
   end
 
-   it  "should respond to content" do
+  context "without valid title" do
 
-        should respond_to(:content)
+    let(:article) { Article.new(title: "")}
+    subject { article }
 
-  end
-
-  it  "should respond to category_id" do
-
-        should respond_to(:category_id)
+    it { should_not be_valid}
 
   end
 
- # its(:content) { should be_valid }
+  context "without valid content" do
+
+    let(:article) { Article.new(title: "News", content: "")}
+    before { article.save}
+    subject { article }
+
+
+    it { should_not be_valid}
+
+  end
+
+  context "without enough content" do
+
+    let(:article) { Article.new(title: "News", content: "#{"a"*29}")}
+    before { article.save}
+    subject { article }
+
+    it { should_not be_valid}
+
+  end
+
+  context "without category_id" do
+
+    let(:article) { Article.new(title: "News", content: "#{"a"*10}", category_id: nil)}
+    before { article.save}
+    subject { article }
+
+    it { should_not be_valid}
+
+  end
+
+  context "without picture" do
+
+    let(:article) { Article.new(title: "News", content: "#{"a"*10}", category_id: category.id, pictures_attributes: {})}
+    before { article.save}
+    subject { article }
+
+    xit { should_not be_valid}
+
+  end
+
 
 end
 

@@ -7,10 +7,12 @@ class Article < ActiveRecord::Base
   belongs_to :category
 
   validates :title, :content, presence: true
+  validates :content, length: {minimum: 10}
+  validates :category_id, presence: true
   has_many :multimedia
   has_many :pictures, :through=>:multimedia
   accepts_nested_attributes_for :pictures
-validates :pictures, :presence => true
+
 
 
 def self.trending_ratio
