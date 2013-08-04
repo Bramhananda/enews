@@ -96,7 +96,7 @@ If you add functionality to this application, create an alternative implementati
 
 ## Credits
 
-scaryguy, Istanbul, Turkey - 2014
+scaryguy, Istanbul, Turkey - 2013
 
 ## License
 
