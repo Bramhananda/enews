@@ -1,6 +1,6 @@
-# eNews News CMS Project
+# eNews CMS
 
-eNews is a ready-to-deploy News Portal CMS software project written in Ruby on Rails. You will only need to create view files to put a news portal into production. eNews is ready to be used with Heroku and AWS (Amazon Web Service). So that means you will need to have one Heroku account and one AWS S3 account to start journey. I started project in third quarter of July 2013. Let's see if there will be any contribution.
+eNews is a ready-to-deploy News Portal CMS project written in Ruby on Rails. You will only need to create view files to put a news portal into production. eNews is ready to be used with Heroku and AWS (Amazon Web Service). So that means you will need to have one Heroku account and one AWS S3 account to start journey. I started project in third quarter of July 2013. Let's see if there will be any contribution.
 
 ## Installation
 
