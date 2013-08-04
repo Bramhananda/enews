@@ -1,0 +1,34 @@
+<div class="page-header position-relative">
+<h1>Hesap ayarları</h1>
+</div>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+<%= f.label :name, "Adı soyadı" %>
+<%= f.text_field :name %>
+
+<%= f.label :email, "E-posta" %>
+  <%= f.email_field :email %>
+
+<%= f.label :password, "Şifre" %> <span class="help-block">(Değiştirmek istemiyorsanız boş bırakınız)</span>
+  <%= f.password_field :password, :autocomplete => "off" %>
+
+<%= f.label :password_confirmation, "Şifre (tekrar)" %>
+  <%= f.password_field :password_confirmation %>
+
+<%= f.label :current_password, "Şu anki şifre" %> <span class="help-block">(Değişikliklerin kaydolması için şu anki şifrenizi giriniz)</span>
+  <%= f.password_field :current_password %>
+<div class="form-actions center">
+<%= f.submit "Güncelle", :class=>"btn btn-success" %>
+</div>
+<% end %>
+
+<div class="span3 pull-right">
+<div class="widget-box">
+<div class="widget-header"><h5>Hesabımı iptal et</h5></div>
+
+<div class="widget-body">
+ <div class="widget-main center"> <%= link_to "Hesabımı iptal et", registration_path(resource_name), :data => { :confirm => "Bunu yapma istediğinize emin misiniz?" }, :method => :delete, :class=>"btn btn-danger btn-mini" %></div>
+</div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<div class="page-header position-relative">
+<h1>"<%= params[:tag] %>" etiketli haberler</h1>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Başlık</th>
+      <th>Yayın tarihi</th>
+      <th>Kategori</th>
+      <th>Etiketler</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.publish_date %></td>
+        <td><%= article.category.title unless article.category.blank? %></td>
+        <td><%= article.tag_list.map { |x| link_to x, admin_tag_path(x)}.join(', ').html_safe %></td>
+        <td><%= link_to 'Show', admin_article_path(article), class: "btn btn-primary btn-mini" %></td>
+        <td><%= link_to 'Edit', edit_admin_article_path(article), class: "btn btn-info btn-mini" %></td>
+        <td><%= link_to 'Destroy', admin_article_path(article), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Article', new_admin_article_path %>

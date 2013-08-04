@@ -1,0 +1,39 @@
+
+                  <div class="widget-box">
+                    <div class="widget-header">
+                      <h4>Giriş</h4>
+                    </div>
+
+                    <div class="widget-body">
+                      <div class="widget-main no-padding">
+                         <%= render 'layouts/messages' %>
+                        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                        <fieldset>
+  <div><%= f.label :email, "E-posta" %>
+  <%= f.email_field :email, :autofocus => true, placeholder: "E-posta adresiniz..." %></div>
+
+  <div><%= f.label :password, "Şifre" %>
+  <%= f.password_field :password, placeholder: "Şifreniz..." %></div>
+
+  <% if devise_mapping.rememberable? -%>
+  <label class="pull-left">
+<%= f.check_box :remember_me %>
+<%= f.label :remember_me, "Beni hatırla", :class=>"lbl" %>
+</label>
+  <% end -%>
+</fieldset>
+  <div class="form-actions center"><%= f.submit "Giriş yap", :class=>"btn btn-small btn-success" do %>
+<i class="icon-arrow-right icon-on-right bigger-110"></i>
+<% end %>
+<br>
+  </div>
+<% end %>
+<div class="pull-left">
+<%= render "devise/shared/links" %>
+</div>
+                      </div>
+                    </div>
+                  </div>
+
+
+

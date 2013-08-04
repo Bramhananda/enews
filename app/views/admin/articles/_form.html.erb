@@ -1,0 +1,128 @@
+<%= form_for([:admin, @article],  :html => { :multipart => true }) do |f| %>
+  <% if @article.errors.any? %>
+  <div class="alert alert-error"> <i class="icon-remove"></i> Haber kaydedilemedi. Lütfen aşağıdaki hataları kontrol edin:</div>
+    <div class="alert alert-error">
+     <ul>
+      <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title, "Haber Başlığı"  %>
+    <%= f.text_field :title, :class=>"span10" %>
+  </div>
+  <div class="field">
+    <%= f.label :content, "Haber metni"  %>
+    <%= f.text_area :content, :class=>"ckeditor" %><br>
+  </div>
+  <dvi class="field">
+
+<%= f.fields_for :pictures do |i| %>
+
+<%= i.label :image, "Haber görseli" %>
+  <%= i.file_field :image, :class=>"ace-file-input" %>
+<% end %>
+
+  </dvi>
+  <div class="field" >
+    <%= f.label :tag_list, "Etiketler"  %>
+
+<div class="controls">
+  <%= f.hidden_field :tag_list, id: "form-field-tags", placeholder: "Etiket giriniz...", data: {autocomplete_source: ActsAsTaggableOn::Tag.all.map(&:name)}  %>
+
+</div><br>
+    <%#= f.text_area :tag_list, id: "tag_list",  %>
+
+  </div>
+<div class="field">
+  <%= f.label :category, "Kategori"  %>
+  <%=  select_tag 'article[category_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }), prompt: "Lütfen bir kategori seçiniz..."%>
+</div><br>
+
+  <div class="field">
+    <%= f.label :publish_date, "Yayın tarihi"  %>
+    <%= f.datetime_select :publish_date %>
+  </div>
+  <div class="form-actions center">
+    <%= f.submit "Kaydet",  :class=> "btn btn-success span2" %>
+    <%= link_to "Vazgeç", :back, :class=> "btn btn-danger", data: { :confirm=>"Emin misiniz?"} %>
+  </div>
+<% end %>
+
+
+<%= provide(:custom_scripts) do %>
+
+<script type="text/javascript">
+
+
+
+
+
+$('#article_category_id').chosen({no_results_text: "Kategori bulunamadı..."});
+
+//we could just set the data-provide="tag" of the element inside HTML, but IE8 fails!
+        var tag_input = $('#form-field-tags');
+        if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) )
+          tag_input.tag({placeholder:tag_input.attr('placeholder')});
+        else {
+          //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+          tag_input.after('<textarea id="'+tag_input.attr('id')+'" name="'+tag_input.attr('name')+'" rows="3">'+tag_input.val()+'</textarea>').remove();
+          //$('#form-field-tags').autosize({append: "\n"});
+        }
+
+$('#article_pictures_attributes_0_image').ace_file_input({
+          style:'well',
+          btn_choose:'Haber görselini seçmek için tıklayın...',
+          btn_change:null,
+          no_icon:'icon-cloud-upload',
+          droppable:true,
+          thumbnail:'small',
+          //,icon_remove:null//set null, to hide remove/reset button
+          before_change : function(files, dropped) {
+              var allowed_files = [];
+              for(var i = 0 ; i < files.length; i++) {
+                var file = files[i];
+                if(typeof file === "string") {
+                  //IE8 and browsers that don't support File Object
+                  if(! (/\.(jpe?g|png|gif|bmp)$/i).test(file) ) return false;
+                }
+                else {
+                  var type = $.trim(file.type);
+                  if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif|bmp)$/i).test(type) )
+                      || ( type.length == 0 && ! (/\.(jpe?g|png|gif|bmp)$/i).test(file.name) )//for android's default browser which gives an empty string for file.type
+                    ) continue;//not an image so don't keep this file
+                }
+
+                allowed_files.push(file);
+              }
+              if(allowed_files.length == 0) return false;
+
+              return allowed_files;
+            },
+
+          /**,before_remove : function() {
+            return true;
+          }*/
+
+          preview_error : function(filename, error_code) {
+            //name of the file that failed
+            //error_code values
+            //1 = 'FILE_LOAD_FAILED',
+            //2 = 'IMAGE_LOAD_FAILED',
+            //3 = 'THUMBNAIL_FAILED'
+            //alert(error_code);
+          },
+
+
+
+        }).on('change', function(){
+        //  console.log($(this).data('ace_input_files'));
+        //  console.log($(this).data('ace_input_method'));
+        });
+
+
+</script>
+
+<% end %>

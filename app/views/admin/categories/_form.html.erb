@@ -1,0 +1,37 @@
+<%= form_for([:admin, @category]) do |f| %>
+<% if @category.errors.any? %>
+  <div class="alert alert-error"> <i class="icon-remove"></i> Kategori kaydedilemedi. Lütfen aşağıdaki hataları kontrol edin:</div>
+    <div class="alert alert-error">
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title, "Başlık"%>
+    <%= f.text_field :title %>
+  </div>
+
+<div class="field">
+   <%= f.label :parent_id, "Üst kategori" %>
+
+     <%=  select_tag 'category[parent_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" })%>
+</div>
+  <div class="form-actions center">
+    <%= f.submit "Kaydet",  :class=> "btn btn-success span2" %>
+    <%= link_to "Vazgeç", :back, :class=> "btn btn-danger", data: { :confirm=>"Emin misiniz?"} %>
+  </div>
+<% end %>
+
+<%= provide(:custom_scripts) do %>
+
+<script type="text/javascript">
+$('#category_parent_id').chosen({no_results_text: "Kategori bulunamadı..."});
+
+
+</script>
+
+<% end %>

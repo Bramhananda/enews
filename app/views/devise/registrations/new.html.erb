@@ -1,0 +1,23 @@
+<div class="page-header position-relative">
+<h1>Kayıt</h1>
+</div>
+
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+<p><%= f.label :name, "Adı soyadı" %><br />
+<%= f.text_field :name %></p>
+
+  <div><%= f.label :email, "E-posta" %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password, "Şifre" %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation, "Şifre (tekrar)" %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Kayıt ol", class: "btn btn-success" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

@@ -1,0 +1,31 @@
+<div class="page-header position-relative">
+<h1><%= @category.title %></h1>
+</div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <p><%= @category.title %></p>
+</p>
+
+<% unless  @category.parent.blank?  %>
+<p>
+    <strong>Üst Kategori:</strong>
+<%= "#{@category.parent.title}" %>
+</p>
+<% end %>
+
+<% unless @category.children.blank? %>
+<p>
+  <strong>Alt kategori:</strong>
+  <% @category.children.each do |t| %>
+  <%= link_to "#{t.title}", admin_category_path(t)%> -
+  <% end %>
+</p>
+<% end %>
+
+
+
+<%= link_to 'Alt kategori ekle', new_admin_category_path %>
+<%= link_to 'Edit', edit_admin_category_path(@category) %> |
+<%= link_to 'Back', admin_categories_path %>

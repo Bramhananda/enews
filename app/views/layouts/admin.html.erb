@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Enews" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Enews" %>">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= yield(:custom_imports) %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin-ext' rel='stylesheet' type='text/css'>
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
+      <%= render 'admin/shared/navbar' %>
+<div class="main-container container-fluid ">
+  <a class="menu-toggler" id="menu-toggler" href="#">
+        <span class="menu-text"></span>
+      </a>
+  <div class="sidebar" id ="sidebar">
+<%= render 'layouts/navigation' %>
+  </div>
+  <div class="main-content">
+<%= render 'admin/shared/breadcrumbs' %>
+        <div class="page-content">
+          <%= render 'layouts/messages' %>
+        <%= yield %>
+        </div>
+    </div>
+</div>
+
+      <footer>
+
+
+        <%= yield(:custom_scripts) %>
+      </footer>
+
+  </body>
+</html>

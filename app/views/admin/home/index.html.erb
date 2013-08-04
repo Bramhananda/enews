@@ -1,0 +1,17 @@
+<div class="row-fluid">
+<div class="span12">
+<div class="page-header position-relative">
+<h1>Site istatistikleri</h1>
+</div>
+
+<div class="infobox infobox-green  ">
+                    <div class="infobox-icon">
+                      <i class="icon-globe"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number"><%= Article.count %></span>
+                      <div class="infobox-content">Toplam haber sayısı </div>
+                    </div>
+                    <%= Article.trending_ratio.html_safe %>
+                  </div>

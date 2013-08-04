@@ -1,0 +1,36 @@
+
+<div class="page-header position-relative">
+<h1><%= @article.title %></h1>
+</div>
+<%= image_tag @article.pictures.first.image(:thumb), :style=>"display: block" %>
+<% unless @article.category.blank? %>
+<% unless  @article.category.parent.blank?  %>
+<p>
+    <strong>Üst Kategori:</strong>
+<%= "#{@article.category.parent.title} - " %>
+</p>
+<% end %>
+  <strong>Kategori:</strong>
+<%= @article.category.title  %>
+</p>
+<% end %>
+
+<p>
+  <strong>Etiket listesi:</strong>
+  <%= @article.tag_list %>
+</p>
+
+<p>
+  <strong>Yayın tarihi:</strong>
+  <%= @article.publish_date %>
+</p>
+
+
+<p>
+  <strong>İçerik:</strong>
+  <%= raw @article.content %>
+</p>
+
+
+<%= link_to 'Düzenle', edit_admin_article_path(@article) %> |
+<%= link_to 'Geri', admin_articles_path %>

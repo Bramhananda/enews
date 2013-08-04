@@ -1,0 +1,49 @@
+
+<ul class="nav nav-list">
+
+      <li>
+      <%= link_to admin_root_path do %>
+      <i class="icon-signal"></i>
+      <span>Genel durum</span>
+      <% end %>
+  </li>
+  <li>
+      <%= link_to admin_articles_path do %>
+      <i class="icon-globe"></i>
+      <span>Haberler</span>
+      <% end %>
+  </li>
+
+
+  <li>
+
+     <%= link_to admin_categories_path do %>
+      <i class="icon-folder-close-alt"></i>
+      <span>Kategoriler</span>
+      <% end %>
+  </li>
+
+
+
+    <% if current_user.has_role? :admin %>
+      <li>
+         <%= link_to '#', :class=>"dropdown-toggle" do %>
+      <i class="icon-cogs"></i>
+      <span>Yönetim</span>
+      <b class="arrow icon-angle-down"></b>
+      <% end %>
+      <ul class="submenu">
+        <li>
+          <%= link_to  admin_users_path do %>
+               <span>Kullanıcı yönetimi</span>
+          <% end %>
+        </li>
+      </ul>
+      </li>
+    <% end %>
+
+
+</ul>
+<div class="sidebar-collapse" id="sidebar-collapse">
+          <i class="icon-double-angle-left"></i>
+        </div>

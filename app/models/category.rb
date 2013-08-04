@@ -1,0 +1,15 @@
+class Category < ActiveRecord::Base
+ acts_as_nested_set
+  attr_accessible :title, :parent_id
+  has_many :articles
+
+  validates :title, presence: true
+
+  def self.list
+      where.not(title: "Kategorisiz")
+  end
+    def self.uncategorized
+    find_by(title: "Kategorisiz")
+  end
+
+end
