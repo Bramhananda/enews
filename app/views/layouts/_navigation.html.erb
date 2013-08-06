@@ -23,6 +23,14 @@
       <% end %>
   </li>
 
+   <li>
+
+     <%= link_to admin_pictures_path do %>
+      <i class="icon-camera"></i>
+      <span>Görseller</span>
+      <% end %>
+  </li>
+
 
 
     <% if current_user.has_role? :admin %>

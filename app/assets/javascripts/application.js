@@ -31,4 +31,5 @@
 //= require bootstrap-wysiwyg.min
 //= require bootbox.min
 //= require chosen.jquery.min
+//= require jquery.colorbox-min
 //= require_self
