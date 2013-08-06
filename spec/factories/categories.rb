@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :category do
-    title "Deneme"
+    title "Lorem ipsum"
   end
 end

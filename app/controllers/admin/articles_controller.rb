@@ -46,7 +46,7 @@ class ArticlesController < BaseController
     end
 
       if @article.save
-        redirect_to [:admin, @article], flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
+        redirect_to admin_article_path(@article), flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
 
       else
       @article.pictures.build

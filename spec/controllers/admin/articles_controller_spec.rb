@@ -30,8 +30,8 @@ describe Admin::ArticlesController do
     let(:valid_attributes) {
      {
         title: "News title",
-        content: "News content",
-        category: category.to_param,
+        content: "News contentvsfsfvsfvsf",
+        category_id: category.id,
         tag_list: "test, test2"
 
       }

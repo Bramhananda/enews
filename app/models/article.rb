@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
   default_scope ->{ order("created_at DESC")}
 
   acts_as_taggable
-  attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes
+  attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes, :category
 
   belongs_to :category
 
