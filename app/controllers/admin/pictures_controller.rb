@@ -3,6 +3,11 @@ class Admin::PicturesController < ApplicationController
 	before_action :authenticate_user!
   def index
   	@pictures = Picture.all
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
