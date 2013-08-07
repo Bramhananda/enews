@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   default_scope ->{ order("created_at DESC")}
+  before_validation :set_default_category
 
   acts_as_taggable
   attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes, :category
@@ -35,6 +36,12 @@ def self.trending_ratio
     HTML
   end
 
+end
+
+private 
+
+def set_default_category
+  self.category = Category.uncategorized if self.category.blank?
 end
 
 

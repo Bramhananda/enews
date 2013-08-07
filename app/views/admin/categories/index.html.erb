@@ -25,9 +25,9 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Show', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to 'Detay', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
+        <td><%= link_to 'Düzenle', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
+        <td><%= link_to 'Sil', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
       </tr>
 
    <%  category.children.each do |category| %>

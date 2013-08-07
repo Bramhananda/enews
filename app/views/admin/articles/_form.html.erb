@@ -17,15 +17,22 @@
     <%= f.label :content, "Haber metni"  %>
     <%= f.text_area :content, :class=>"ckeditor" %><br>
   </div>
-  <dvi class="field">
+  
 
-<%= f.fields_for :pictures do |i| %>
+
+  <div class="row-fluid">
+    <%= content_tag('label', "Haber resimleri") if @article.pictures.delete_if { |x| x.new_record?}.any? %>
+    <%= render 'admin/pictures/pictures_grid', :pictures_array=>@article.pictures.delete_if { |x| x.new_record?} %>
+
+  </div><br>
+<div class="field">
+<%= f.fields_for :pictures, @article.pictures.build do |i| %>
 
 <%= i.label :image, "Haber görseli" %>
   <%= i.file_field :image, :class=>"ace-file-input" %>
 <% end %>
 
-  </dvi>
+  </div>
   <div class="field" >
     <%= f.label :tag_list, "Etiketler"  %>
 
@@ -38,7 +45,7 @@
   </div>
 <div class="field">
   <%= f.label :category, "Kategori"  %>
-  <%=  select_tag 'article[category_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }), prompt: "Lütfen bir kategori seçiniz..."%>
+  <%=  select_tag 'article[category_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }, selected: (@article.category.id if !@article.category.blank?)), prompt: "Lütfen bir kategori seçiniz..."%>
 </div><br>
 
   <div class="field">

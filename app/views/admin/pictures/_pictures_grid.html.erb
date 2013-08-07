@@ -1,0 +1,24 @@
+<ul class="ace-thumbnails">
+	<% pictures_array.each do |t| %>
+	<li>
+										
+										<%= link_to edit_admin_picture_path(t), data: { rel: "colorbox"}, class: "cboxElement" do %>
+											<img alt="200x200" src="<%= t.image(:absolute_thumb) %>">
+										<% end %>
+
+										<div class="tools tools-right">
+											<%= link_to t.image.url, target: "_blank" do %>
+												<i class="icon-link"></i>
+											<% end %>
+
+											<%= link_to edit_admin_picture_path(t) do %>
+												<i class="icon-pencil"></i>
+											<% end %>
+
+											<%= link_to admin_picture_path(t), :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
+												<i class="icon-remove red"></i>
+											<% end %>
+										</div>
+									</li>
+			<% end %>
+</ul>

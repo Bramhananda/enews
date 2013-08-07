@@ -34,6 +34,8 @@ class ArticlesController < BaseController
 
   # GET /articles/1/edit
   def edit
+    @article.pictures.build
+     @categories = Category.list.sort{|x,y| x.title <=> y.title}
   end
 
   # POST /articles
@@ -59,6 +61,8 @@ class ArticlesController < BaseController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+
+    
 
       if @article.update(article_params)
        redirect_to [:admin, @article], flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla düzenlendi.".html_safe}
