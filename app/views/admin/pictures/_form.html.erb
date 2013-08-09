@@ -14,14 +14,15 @@
     <%= f.text_field :title, :class=>"span10" %>
   </div>
 
-  <dvi class="field">
+  <div class="field">
 
 <%= f.label :image, "Haber görseli" %>
   <%= f.file_field :image, :class=>"ace-file-input" %>
 
-  </dvi>
-
-
+  </div>
+<% if params[:gallery_id] %>
+<%= f.hidden_field :gallery_id, value: params[:gallery_id] %>
+<% end %>
   <div class="form-actions center">
     <%= f.submit "Kaydet",  :class=> "btn btn-success span2" %>
     <%= link_to "Vazgeç", :back, :class=> "btn btn-danger", data: { :confirm=>"Emin misiniz?"} %>

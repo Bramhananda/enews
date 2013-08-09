@@ -30,7 +30,7 @@
         <td><%= article.tag_list.map { |x| link_to x, admin_tag_path(x), :class=>"label label-success arrowed-in arrowed-in-right"}.join(', ').html_safe %></td>
         <td><%= link_to 'Detay', admin_article_path(article), class: "btn btn-primary btn-mini" %></td>
         <td><%= link_to 'Düzenle', edit_admin_article_path(article), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Sil', admin_article_path(article), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Sil', admin_article_path(article), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' } %></td>
       </tr>
     <% end %>
   </tbody>

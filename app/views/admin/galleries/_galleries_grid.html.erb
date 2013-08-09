@@ -1,0 +1,62 @@
+<% galleries_array.each do |t| %>
+
+	<div class="span2 widget-container-span"><div class="widget-box">
+			<div class="widget-header">
+				<h5><%= t.title %></h5>
+				<span class="widget-toolbar">
+					<%= link_to admin_gallery_path(t), :method=>:delete, confirm: "Galeriyi silmek istediğinize emin misiniz?" do %>
+						<i class="icon-remove"></i>
+					<% end %>
+				</span>
+			</div>
+	
+			<div class="widget-body">
+	
+				<div class="widget-main">
+					<div class="row-fluid">
+						<% if !t.pictures.blank? %>
+						<ul class="ace-thumbnails" style="float: left">
+							<li>
+																						
+				<%= link_to edit_admin_gallery_path(t), data: { rel: "colorbox"}, class: "cboxElement" do %>
+					<img alt="200x200" src="<%= t.pictures.last.image(:absolute_thumb) %>">
+				<% end %>
+
+				<div class="tools tools-right">
+					<%= link_to t.pictures.last.image.url, target: "_blank" do %>
+						<i class="icon-link"></i>
+					<% end %>
+
+					<%= link_to edit_admin_gallery_path(t) do %>
+						<i class="icon-pencil"></i>
+					<% end %>
+
+					<% if controller_name=="galleries" && action_name !="index" %>
+					<%= link_to admin_picture_path(:gallery_id=>@gallery.id), t.pictures.last, :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
+						<i class="icon-remove red"></i>
+					<% end %>
+					<% elsif controller_name=="articles" %>
+					<%= link_to admin_picture_path(t.pictures.last, :article_id=>@article.id),  :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
+						<i class="icon-remove red"></i>
+					<% end %>
+					<% else %>
+					<%= link_to admin_picture_path(t.pictures.last), :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
+						<i class="icon-remove red"></i>
+					<% end %>
+					<% end %>
+				</div>
+						</li>
+							</ul>
+						<% else %>
+						<%= link_to "Yeni resim ekle", admin_picture_add_to_gallery_path(t) %>
+						<% end %>
+
+													</div>
+	
+								</div>
+	
+					</div>
+	
+			</div></div>
+
+			<% end %>

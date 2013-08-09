@@ -12,6 +12,7 @@ class Article < ActiveRecord::Base
   validates :category_id, presence: true
   has_many :multimedia
   has_many :pictures, :through=>:multimedia
+  has_many :galleries, :through=>:multimedia
   accepts_nested_attributes_for :pictures
 
 

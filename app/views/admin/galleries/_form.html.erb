@@ -1,65 +1,41 @@
-<%= form_for([:admin, @article],  :html => { :multipart => true }) do |f| %>
-  <% if @article.errors.any? %>
-  <div class="alert alert-error"> <i class="icon-remove"></i> Haber kaydedilemedi. Lütfen aşağıdaki hataları kontrol edin:</div>
+<%= form_for([:admin, @gallery],  :html => { :multipart => true }) do |f| %>
+  <% if @gallery.errors.any? %>
+  <div class="alert alert-error"> <i class="icon-remove"></i> Görsel kaydedilemedi. Lütfen aşağıdaki hataları kontrol edin:</div>
     <div class="alert alert-error">
      <ul>
-      <% @article.errors.full_messages.each do |msg| %>
+      <% @gallery.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :title, "Haber Başlığı"  %>
+    <%= f.label :title, "Galeri Başlığı"  %>
     <%= f.text_field :title, :class=>"span10" %>
   </div>
+
   <div class="field">
-    <%= f.label :content, "Haber metni"  %>
-    <%= f.text_area :content, :class=>"ckeditor" %><br>
+    <%= f.label :description, "Galeri açıklaması"  %>
+    <%= f.text_area :description, :class=>"span10" %>
   </div>
-  
-  <div class="row-fluid">
-    <%= content_tag('label', "Haber resimleri") if @article.pictures.delete_if { |x| x.new_record?}.any? %>
-    <%= render 'admin/pictures/pictures_grid', :pictures_array=>@article.pictures.delete_if { |x| x.new_record?} %>
+
+   <div class="row-fluid">
+    <%= content_tag('label', "Galeri resimleri") if @gallery.pictures.delete_if { |x| x.new_record?}.any? %>
+    <%= render 'admin/pictures/pictures_grid', :pictures_array=>@gallery.pictures.delete_if { |x| x.new_record?} %>
 
   </div><br>
 
-  <div class="row-fluid">
-    <% if @article.galleries.any? %>
-    <%= content_tag('label', "Haber galerileri")  %>
-    <%= link_to "Yeni galeri ekle", new_admin_gallery_path(article_id: @article.id), class: "btn btn-success btn-mini pull-right" %><br>
-    <%= render 'admin/galleries/galleries_grid', :galleries_array=>@article.galleries %>
-    <% else %>
-    <%= link_to "Yeni galeri ekle", new_admin_gallery_path(article_id: @article.id), class: "btn btn-success btn-mini pull-left" %><br>
-    <% end %>
-  </div><br>
-<div class="field">
-<%= f.fields_for :pictures, @article.pictures.build do |i| %>
+  <div class="field">
+<%= f.fields_for :pictures, @gallery.pictures.build do |r| %>
+<%= r.label :image, "Galeri görseli" %>
+  <%= r.file_field :image, :class=>"ace-file-input" %>
+<% end %>
+  </div>
 
-<%= i.label :image, "Haber görseli" %>
-  <%= i.file_field :image, :class=>"ace-file-input" %>
+<% if !params[:article_id].blank? %>
+  <%= f.hidden_field :article_id, value: params[:article_id] %>
 <% end %>
 
-  </div>
-  <div class="field" >
-    <%= f.label :tag_list, "Etiketler"  %>
-
-<div class="controls">
-  <%= f.hidden_field :tag_list, id: "form-field-tags", placeholder: "Etiket giriniz...", data: {autocomplete_source: ActsAsTaggableOn::Tag.all.map(&:name)}  %>
-
-</div><br>
-    <%#= f.text_area :tag_list, id: "tag_list",  %>
-
-  </div>
-<div class="field">
-  <%= f.label :category, "Kategori"  %>
-  <%=  select_tag 'article[category_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }, selected: (@article.category.id if !@article.category.blank?)), prompt: "Lütfen bir kategori seçiniz..."%>
-</div><br>
-
-  <div class="field">
-    <%= f.label :publish_date, "Yayın tarihi"  %>
-    <%= f.datetime_select :publish_date %>
-  </div>
   <div class="form-actions center">
     <%= f.submit "Kaydet",  :class=> "btn btn-success span2" %>
     <%= link_to "Vazgeç", :back, :class=> "btn btn-danger", data: { :confirm=>"Emin misiniz?"} %>
@@ -87,7 +63,7 @@ $('#article_category_id').chosen({no_results_text: "Kategori bulunamadı..."});
           //$('#form-field-tags').autosize({append: "\n"});
         }
 
-$('#article_pictures_attributes_0_image').ace_file_input({
+$('#gallery_pictures_attributes_0_image').ace_file_input({
           style:'well',
           btn_choose:'Haber görselini seçmek için tıklayın...',
           btn_change:null,

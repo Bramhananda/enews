@@ -14,6 +14,7 @@ include Capybara::DSL
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
+  config.extend PaperclipMacros
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   # ## Mock Framework

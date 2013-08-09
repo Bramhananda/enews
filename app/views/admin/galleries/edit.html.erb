@@ -1,0 +1,27 @@
+<div class="row-fluid">
+<div class="span12">
+<div class="page-header position-relative">
+<h1>Galeri düzenleme</h1>
+</div>
+<div class="row-fluid">
+<%= link_to "Yeni resim ekle", admin_picture_add_to_gallery_path(@gallery.id), class: "btn btn-success", style: "margin-bottom: 10px" %>
+</div>
+
+
+<%= render 'form' %>
+<div class="row-fluid">
+<div class="widget-box">
+<div class="widget-header">
+	<h5>Kullanıldığı haberler:</h5>
+</div>
+<div class="widget-body">
+<div class="widget-main">
+<% @gallery.articles.each do |t| %>
+<%= link_to t.title, admin_article_path(t)  %>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

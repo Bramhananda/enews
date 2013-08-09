@@ -1,0 +1,14 @@
+<div class="row-fluid">
+<div class="span12">
+<div class="page-header position-relative">
+<h1>Galeri yönetimi</h1>
+</div>
+	<div class="row-fluid">
+<%= link_to 'Yeni galeri', new_admin_gallery_path, class: "btn btn-success", style: "margin-bottom: 10px"%>
+<%= link_to 'Tüm görseller', admin_pictures_path, class: "btn btn-warning", style: "margin-bottom: 10px"%>
+	</div>
+	<%= render 'admin/galleries/galleries_grid', :galleries_array=>@galleries %>
+
+
+</div>
+</div>
