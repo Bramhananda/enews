@@ -12,8 +12,7 @@
       <th>Kategori</th>
       <th>Etiketler</th>
       <th></th>
-      <th></th>
-      <th></th>
+
     </tr>
   </thead>
 
@@ -28,9 +27,19 @@
         <% end %>
         </td>
         <td><%= article.tag_list.map { |x| link_to x, admin_tag_path(x), :class=>"label label-success arrowed-in arrowed-in-right"}.join(', ').html_safe %></td>
-        <td><%= link_to 'Detay', admin_article_path(article), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Düzenle', edit_admin_article_path(article), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Sil', admin_article_path(article), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' } %></td>
+        <td><%= link_to admin_article_path(article), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_article_path(article), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_article_path(article), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

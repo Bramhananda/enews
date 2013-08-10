@@ -3,14 +3,13 @@
 <div class="page-header position-relative">
 <h1>Kategoriler</h1>
 </div>
-
+<%= link_to 'Yeni Kategori', new_admin_category_path, :class=>"btn btn-success", class: "btn btn-success", style: "margin-bottom: 10px" %>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Başlık</th>
       <th></th>
-      <th></th>
-      <th></th>
+
 <th></th>
     </tr>
   </thead>
@@ -25,9 +24,19 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Detay', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Düzenle', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Sil', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to admin_category_path(category), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_category_path(category), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
 
    <%  category.children.each do |category| %>
@@ -38,9 +47,19 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Show', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to admin_category_path(category), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_category_path(category), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
       <%  category.children.each do |category| %>
             <tr>
@@ -50,9 +69,19 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Show', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to admin_category_path(category), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_category_path(category), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
         <%  category.children.each do |category| %>
             <tr>
@@ -62,9 +91,19 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Show', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to admin_category_path(category), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_category_path(category), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
         <%  category.children.each do |category| %>
             <tr>
@@ -74,9 +113,19 @@
           Haberler
         <% end %>
          </td>
-        <td><%= link_to 'Show', admin_category_path(category), class: "btn btn-primary btn-mini" %></td>
-        <td><%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-info btn-mini" %></td>
-        <td><%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Silmek istediğinize emin misiniz?' } %></td>
+        <td><%= link_to admin_category_path(category), class: "btn btn-primary btn-mini", title: "Detay" do %>
+           <i class="icon-info-sign"></i>
+          
+          <% end %>
+        <%= link_to edit_admin_category_path(category), class: "btn btn-info btn-mini", title: "Düzenle" do %>
+        <i class="icon-edit"></i>
+          
+        <% end %>
+        <%= link_to admin_category_path(category), class: "btn btn-danger btn-mini", method: :delete, data: { confirm: 'Haberi silmek istediginize emin misiniz?' }, title: "Sil" do %>
+        <i class="icon-remove"></i>
+          
+        <% end %>
+        </td>
       </tr>
     <% end %>
     <% end %>
@@ -90,8 +139,8 @@
   </tbody>
 </table>
 <%= will_paginate @categories, :renderer=>"BootstrapLinkRenderer" %>
-<br>
 
-<%= link_to 'Yeni Kategori', new_admin_category_path, :class=>"btn btn-success" %>
+
+
 </div>
 </div>

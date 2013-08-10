@@ -48,7 +48,10 @@
 						</li>
 							</ul>
 						<% else %>
-						<%= link_to "Yeni resim ekle", admin_picture_add_to_gallery_path(t) %>
+						<%= link_to admin_picture_add_to_gallery_path(t), class: "btn btn-app btn-light" do%>
+							<i class="icon-picture bigger-200"></i>
+							Resim ekle
+						<% end %>
 						<% end %>
 
 													</div>
