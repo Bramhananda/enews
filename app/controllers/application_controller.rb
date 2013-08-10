@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  # A hook in your ApplicationController
+def authorize
+  if current_user.is_admin? 
+    Rack::MiniProfiler.authorize_request
+  end
+end
+
     protected
 
   def configure_permitted_parameters

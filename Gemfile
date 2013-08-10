@@ -12,6 +12,7 @@ gem 'will_paginate'
 gem 'awesome_nested_set', :git=>"https://github.com/collectiveidea/awesome_nested_set.git"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk'
+gem 'rack-mini-profiler'
 group :doc do
   gem 'sdoc', require: false
 end
@@ -25,6 +26,7 @@ gem 'acts-as-taggable-on'
 group :development do
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
   gem 'quiet_assets'
+
 end
 group :development, :test do
   gem 'factory_girl_rails'

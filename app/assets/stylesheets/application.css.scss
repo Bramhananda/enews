@@ -18,3 +18,8 @@
  *= require chosen
  *= require_self
 */
+
+.profiler-min, .profiler-controls {
+
+	z-index: 999999;
+}
