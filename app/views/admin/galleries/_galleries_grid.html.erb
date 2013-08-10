@@ -1,8 +1,9 @@
 <% galleries_array.each do |t| %>
 
-	<div class="span2 widget-container-span"><div class="widget-box">
+	<div class="span4 widget-container-span"><div class="widget-box">
 			<div class="widget-header">
-				<h5><%= t.title %></h5>
+				<h1>&nbsp;</h1>
+
 				<span class="widget-toolbar">
 					<%= link_to admin_gallery_path(t), :method=>:delete, confirm: "Galeriyi silmek istediğinize emin misiniz?" do %>
 						<i class="icon-remove"></i>
@@ -15,43 +16,30 @@
 				<div class="widget-main">
 					<div class="row-fluid">
 						<% if !t.pictures.blank? %>
-						<ul class="ace-thumbnails" style="float: left">
-							<li>
-																						
-				<%= link_to edit_admin_gallery_path(t), data: { rel: "colorbox"}, class: "cboxElement" do %>
-					<img alt="200x200" src="<%= t.pictures.last.image(:absolute_thumb) %>">
-				<% end %>
+						<div class="span4">
+							<ul class="ace-thumbnails">
+													<li>
+																												
+										<%= link_to edit_admin_gallery_path(t) do %>
+											<img alt="200x200" width="100" height="100"src="<%= t.pictures.last.image(:absolute_thumb) %>">
+										<% end %>
+						
+									
+												</li>
+													</ul></div>
 
-				<div class="tools tools-right">
-					<%= link_to t.pictures.last.image.url, target: "_blank" do %>
-						<i class="icon-link"></i>
-					<% end %>
-
-					<%= link_to edit_admin_gallery_path(t) do %>
-						<i class="icon-pencil"></i>
-					<% end %>
-
-					<% if controller_name=="galleries" && action_name !="index" %>
-					<%= link_to admin_picture_path(:gallery_id=>@gallery.id), t.pictures.last, :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
-						<i class="icon-remove red"></i>
-					<% end %>
-					<% elsif controller_name=="articles" %>
-					<%= link_to admin_picture_path(t.pictures.last, :article_id=>@article.id),  :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
-						<i class="icon-remove red"></i>
-					<% end %>
-					<% else %>
-					<%= link_to admin_picture_path(t.pictures.last), :method=>:delete, :data=> { confirm: "Görseli silmek istediginize emin misiniz?" } do %>
-						<i class="icon-remove red"></i>
-					<% end %>
-					<% end %>
-				</div>
-						</li>
-							</ul>
+							<div class="span8">
+								<h6><%= link_to t.title, edit_admin_gallery_path(t) %></h6>
+							</div>
 						<% else %>
-						<%= link_to admin_picture_add_to_gallery_path(t), class: "btn btn-app btn-light" do%>
+						<div class="span6">
+							<%= link_to admin_picture_add_to_gallery_path(t), class: "btn btn-app btn-light" do%>
 							<i class="icon-picture bigger-200"></i>
 							Resim ekle
-						<% end %>
+							<% end %></div>
+						<div class="span6">
+							<h6><%= link_to t.title, edit_admin_gallery_path(t) %></h6>
+						</div>
 						<% end %>
 
 													</div>

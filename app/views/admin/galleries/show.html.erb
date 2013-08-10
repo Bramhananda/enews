@@ -5,5 +5,6 @@
 </div>
 <%= link_to "Yeni resim ekle", admin_picture_add_to_gallery_path(@gallery), class: "btn btn-success",style: "margin-bottom: 10px" %>
 <%= render 'admin/pictures/pictures_grid', :pictures_array=>@gallery.pictures %>
+<%= link_to "Galeriyi sil", admin_gallery_path(@gallery), :method=>:delete, data: { confirm: "Galeriyi silmek istediginize emin misiniz?"}, class: "btn btn-danger pull-right" %>
 </div>
 </div>

@@ -30,6 +30,7 @@ class ArticlesController < BaseController
     @article = Article.new
     @article.pictures.build
      @categories = Category.list.sort{|x,y| x.title <=> y.title}
+     @article.category_id ||= params[:category_id]
   end
 
   # GET /articles/1/edit

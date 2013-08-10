@@ -10,6 +10,7 @@ class Admin::GalleriesController < ApplicationController
 	def new
 		@gallery = Gallery.new
 		@gallery.pictures.build
+		@article = Article.find(params[:article_id]) if params[:article_id]
 	end
 
 	def create
