@@ -34,11 +34,11 @@ class Admin::GalleriesController < ApplicationController
 	end
 
 	def show
-		
+
 	end
 
 	def edit
-		
+
 	end
 
 	def update
@@ -49,11 +49,11 @@ class Admin::GalleriesController < ApplicationController
       end
 	end
 
-	
+
 
 	def destroy
 		if @gallery.pictures.blank?
-			@gallery.destroy 
+			@gallery.destroy
 			redirect_to admin_galleries_path, flash: { success: "<i class=\"icon-ok\"></i> Galeri silindi.".html_safe}
 		else
 			redirect_to admin_gallery_path(@gallery), flash: { error: "<i class=\"icon-remove\"></i> Öncelikle galerinin içini boşaltmalısınız.".html_safe}

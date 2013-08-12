@@ -39,7 +39,7 @@ def self.trending_ratio
 
 end
 
-private 
+private
 
 def set_default_category
   self.category = Category.uncategorized if self.category.blank?

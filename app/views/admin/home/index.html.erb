@@ -10,8 +10,57 @@
                     </div>
 
                     <div class="infobox-data">
-                      <span class="infobox-data-number"><%= Article.count %></span>
+                      <span class="infobox-data-number"><%= @article_count %></span>
                       <div class="infobox-content">Toplam haber sayısı </div>
                     </div>
                     <%= Article.trending_ratio.html_safe %>
+                  </div>
+
+<div class="infobox infobox-red  ">
+                    <div class="infobox-icon">
+                      <i class="icon-folder-close-alt"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number"><%= @category_count %></span>
+                      <div class="infobox-content">Toplam kategori sayısı </div>
+                    </div>
+
+                  </div>
+
+<div class="infobox infobox-blue  ">
+                    <div class="infobox-icon">
+                      <i class="icon-picture"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number"><%= @pictures_count %></span>
+                      <div class="infobox-content">Toplam görsel sayısı </div>
+                    </div>
+
+                  </div>
+
+                  <div class="infobox infobox-pink  ">
+                    <div class="infobox-icon">
+                      <i class="icon-camera"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number"><%= @galleries_count %></span>
+                      <div class="infobox-content">Toplam galeri sayısı </div>
+                    </div>
+
+                  </div>
+
+
+                      <div class="infobox infobox-black  ">
+                    <div class="infobox-icon">
+                      <i class="icon-male"></i>
+                    </div>
+
+                    <div class="infobox-data">
+                      <span class="infobox-data-number"><%= @users_count %></span>
+                      <div class="infobox-content">Toplam kullanıcı sayısı </div>
+                    </div>
+
                   </div>

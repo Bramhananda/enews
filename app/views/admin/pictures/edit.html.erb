@@ -1,5 +1,6 @@
 <div class="page-header position-relative">
 <h1>Görsel düzenleme</h1>
 </div>
+<%= link_to "Görseli sil", admin_picture_path(@picture), :method=>:delete, data: { confirm: "Göseli silmek istediğinize emin misiniz?"}, class: "btn btn-danger pull-right", style: "margin-bottom: 10px" %>
 <%= image_tag(@picture.image(:medium)) %>
 <%= render 'form' %>

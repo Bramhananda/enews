@@ -18,7 +18,7 @@
     <%= f.label :content, "Haber metni"  %>
     <%= f.text_area :content, :class=>"ckeditor" %><br>
   </div>
-  
+
   <div class="row-fluid">
     <%= content_tag('label', "Haber resimleri") if @article.pictures.delete_if { |x| x.new_record?}.any? %>
     <%= render 'admin/pictures/pictures_grid', :pictures_array=>@article.pictures.delete_if { |x| x.new_record?} %>
@@ -30,12 +30,14 @@
       <div class="row-fluid">
     <%= content_tag('label', "Haber galerileri")  %>
     <%= link_to "Yeni galeri ekle", new_admin_gallery_path(article_id: @article.id), class: "btn btn-success btn-mini pull-right" %><br>
-   
+
     <%= render 'admin/galleries/galleries_grid', :galleries_array=>@article.galleries %>
      </div><br>
     <% else %>
-    <%= link_to "Yeni galeri ekle", new_admin_gallery_path(article_id: @article.id), class: "btn btn-success btn-mini pull-left" %><br><br>
-      
+
+    <% if !@article.new_record? %>
+        <%= link_to "Yeni galeri ekle", new_admin_gallery_path(article_id: @article.id), class: "btn btn-success btn-mini pull-left" %><br><br>
+          <% end %>
     <% end %>
 
 <div class="field">
