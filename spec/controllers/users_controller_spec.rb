@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe Admin::UsersController do
 
   before (:each) do
     @user = FactoryGirl.create(:user)
@@ -20,5 +20,7 @@ describe UsersController do
     end
     
   end
+
+   
 
 end

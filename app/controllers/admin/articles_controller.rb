@@ -1,14 +1,17 @@
 module Admin
 class ArticlesController < BaseController
+  load_and_authorize_resource
   layout 'admin'
   before_action :authenticate_user!
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+
 
   # GET /articles
   # GET /articles.json
   def index
     if params[:category_id].blank?
       @articles = Article.all.paginate(:page => params[:page], :per_page => 10)
+
     else
        @articles = Article.where(category_id: params[:category_id]).paginate(:page => params[:page], :per_page => 10)
         @category = Category.find(params[:category_id])
@@ -31,6 +34,8 @@ class ArticlesController < BaseController
     @article.pictures.build
      @categories = Category.list.sort{|x,y| x.title <=> y.title}
      @article.category_id ||= params[:category_id]
+
+
   end
 
   # GET /articles/1/edit
@@ -42,6 +47,7 @@ class ArticlesController < BaseController
   # POST /articles
   # POST /articles.json
   def create
+
     @article = Article.new(article_params)
 
     if article_params[:category_id].blank?
@@ -49,6 +55,7 @@ class ArticlesController < BaseController
     end
 
       if @article.save
+        current_user.articles << @article
         redirect_to admin_article_path(@article), flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
 
       else
@@ -56,16 +63,16 @@ class ArticlesController < BaseController
      render action: 'new'
 
       end
-
+      authorize! :create, @article
   end
 
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
 
-    
 
       if @article.update(article_params)
+
        redirect_to [:admin, @article], flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla düzenlendi.".html_safe}
       else
        render action: 'edit'

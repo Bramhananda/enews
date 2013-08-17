@@ -7,6 +7,9 @@ require 'email_spec'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/rspec'
+
+
+
 include Capybara::DSL
 
 # Requires supporting ruby files with custom matchers and macros, etc,

@@ -1,12 +1,13 @@
 class Article < ActiveRecord::Base
   default_scope ->{ order("created_at DESC")}
+ 
   before_validation :set_default_category
 
   acts_as_taggable
   attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes, :category
 
   belongs_to :category
-
+  belongs_to :user
   validates :title, :content, presence: true
   validates :content, length: {minimum: 10}
   validates :category_id, presence: true

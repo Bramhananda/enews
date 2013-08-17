@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require "cancan/matchers"
 describe User do
 
   before(:each) do
@@ -98,6 +98,24 @@ describe User do
       @user.encrypted_password.should_not be_blank
     end
 
+  end
+
+ describe "when is a Columnist" do
+     describe "abilities" do
+        
+       
+       
+       
+      context "when a columnist" do
+          let(:ability) { Ability.new(FactoryGirl.create(:columnist))}
+          subject { ability } 
+           it { should be_able_to(:manage, FactoryGirl.create(:article))}
+           it {should_not be_able_to(:manage, Category.new)}
+      end
+
+
+       end
+      
   end
 
 end

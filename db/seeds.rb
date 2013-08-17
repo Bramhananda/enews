@@ -17,6 +17,11 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 user.add_role :admin
 
+puts 'DEFAULT COLUMNIST'
+user2 = User.find_or_create_by_email :name => ENV['COLUMNIST_NAME'].dup, :email => ENV['COLUMNIST_EMAIL'].dup, :password => ENV['COLUMNIST_PASSWORD'].dup, :password_confirmation => ENV['COLUMNIST_PASSWORD'].dup
+puts 'Columnist: ' << user2.name
+user2.add_role :columnist
+
 puts 'UNCATEGORIZED CATEGORY ADDING'
 category = Category.find_or_create_by_title(title: ENV['UNCATEGORIZED'].dup)
 
