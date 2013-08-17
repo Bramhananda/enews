@@ -75,6 +75,13 @@ describe "validations" do
 
 end
 
+  describe "when a columnist inserted an article" do
+    let!(:columnist) { FactoryGirl.create(:columnist)}
+    let!(:article) { FactoryGirl.create(:article, user: columnist, active: false)} 
+    subject { article }
+    its('active') { should == false}
+  end
+
 end
 
 

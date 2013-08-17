@@ -107,10 +107,25 @@ describe User do
        
        
       context "when a columnist" do
-          let(:ability) { Ability.new(FactoryGirl.create(:columnist))}
+          let!(:user) { FactoryGirl.create(:columnist) }
+          let!(:category) { FactoryGirl.create(:category) }
+          let!(:article) { FactoryGirl.create(:article, :user=>user) }
+          let(:ability) { Ability.new(user)}
           subject { ability } 
-           it { should be_able_to(:manage, FactoryGirl.create(:article))}
-           it {should_not be_able_to(:manage, Category.new)}
+           it { should be_able_to(:manage, article)}
+           it {should_not be_able_to(:manage, category)}
+           it {should_not be_able_to(:manage, Gallery)}
+      end
+
+      context "when a admin" do
+          let!(:user) { FactoryGirl.create(:admin) }
+          let!(:category) { FactoryGirl.create(:category) }
+          let!(:article) { FactoryGirl.create(:article) }
+          let(:ability) { Ability.new(user)}
+          subject { ability } 
+           it { should be_able_to(:manage, article)}
+           it {should be_able_to(:manage, category)}
+           it {should be_able_to(:manage, Gallery)}
       end
 
 

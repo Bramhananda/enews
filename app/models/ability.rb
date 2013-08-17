@@ -5,10 +5,8 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
       can :manage, :all
-    end
-
-    if user.has_role? :columnist
-        can :manage, Article, :user=>user
+    elsif user.has_role? :columnist
+        can :manage, Article, :user_id=>user.id
         cannot :manage, Category
         cannot :manage, Gallery
 

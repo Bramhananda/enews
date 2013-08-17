@@ -1,4 +1,15 @@
 tr:
+  unauthorized:
+    manage:
+      all: "Bu işlem için yetkiniz yok."
+      user: "Başka kullanıcının bilgilerini değiştiremezsiniz."
+      gallery: "Galeriler üstünde yetkiniz bulunmuyor."
+      category: "Kategoriler üstünde yetkiniz bulunmuyor."
+    destroy:
+      user: "Kullanıcı silme yetkiniz yok."
+      gallery: "Galeri silme yetkiniz yok."
+      category: "Kategori silme yetkiniz yok."
+      article: "Haber silme yetkiniz yok."
   will_paginate:
     previous_label: "&#8592; Önceki"
     next_label: "Sonraki &#8594;"

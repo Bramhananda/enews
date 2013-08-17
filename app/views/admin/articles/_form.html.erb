@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+
+
+
+
   <div class="field">
     <%= f.label :title, "Haber Başlığı"  %>
     <%= f.text_field :title, :class=>"span10" %>
@@ -58,11 +62,21 @@
     <%#= f.text_area :tag_list, id: "tag_list",  %>
 
   </div>
+
 <div class="field">
   <%= f.label :category, "Kategori"  %>
   <%=  select_tag 'article[category_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }, selected: (@article.category_id if !@article.category.blank?)), prompt: "Lütfen bir kategori seçiniz..."%>
 </div><br>
-
+<% if current_user.has_role? :admin %>
+<div class="field">
+  <%= f.label :active, "Onay" %>
+  <label>
+   
+    <%= f.check_box :active, class: "ace ace-switch ace-switch-6"%>
+     <span class="lbl"></span>
+    </label>
+</div><br>
+<% end %>
   <div class="field">
     <%= f.label :publish_date, "Yayın tarihi"  %>
     <%= f.datetime_select :publish_date %>

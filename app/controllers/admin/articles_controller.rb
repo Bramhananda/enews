@@ -1,20 +1,28 @@
 module Admin
 class ArticlesController < BaseController
-  load_and_authorize_resource
+  include ApplicationHelper
   layout 'admin'
   before_action :authenticate_user!
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
 
   # GET /articles
   # GET /articles.json
   def index
-    if params[:category_id].blank?
-      @articles = Article.all.paginate(:page => params[:page], :per_page => 10)
-
-    else
-       @articles = Article.where(category_id: params[:category_id]).paginate(:page => params[:page], :per_page => 10)
+    if current_user.has_role?(:admin) && !params[:category_id].blank?
+        @articles = Article.where(category_id: params[:category_id]).paginate(:page => params[:page], :per_page => 10)
         @category = Category.find(params[:category_id])
+
+    elsif current_user.has_role?(:admin) && params[:active]=="false"
+
+       @articles = Article.where.not(:active=>true).paginate(:page => params[:page], :per_page => 10)
+    else
+
+        if current_user.has_role?(:admin)
+          @articles = Article.all.paginate(:page => params[:page], :per_page => 10)
+        else
+          @articles = current_user.articles.paginate(:page => params[:page], :per_page => 10)
+        end
     end
 
   end
@@ -54,6 +62,10 @@ class ArticlesController < BaseController
       @article.category = Category.uncategorized
     end
 
+    if current_user.has_role? :columnist
+      @article.active = false
+    end
+
       if @article.save
         current_user.articles << @article
         redirect_to admin_article_path(@article), flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
@@ -63,7 +75,7 @@ class ArticlesController < BaseController
      render action: 'new'
 
       end
-      authorize! :create, @article
+    
   end
 
   # PATCH/PUT /articles/1
@@ -98,7 +110,7 @@ class ArticlesController < BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :publish_date, :category_id, :tag_list, pictures_attributes: [:image])
+      params.require(:article).permit(:title, :content, :publish_date, :category_id, :active, :tag_list, pictures_attributes: [:image])
     end
 end
 end
