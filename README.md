@@ -64,6 +64,22 @@ Create a Heroku application:
 heroku create
 ```
 
+Create your database:
+
+```console
+heroku addons:add heroku-postgresql:dev
+```
+
+If you get this error:
+>could not connect to server: Connection refused
+>Is the server running on host "127.0.0.1" and accepting
+>TCP/IP connections on port xxxx?
+be sure that your `DATABASE_URL` environment variable is set properly inside your Heroku config.
+
+```console
+heroku config
+```
+
 You should enable user env compile:
 
 ```console

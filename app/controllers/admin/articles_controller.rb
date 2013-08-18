@@ -10,12 +10,14 @@ class ArticlesController < BaseController
   # GET /articles.json
   def index
     if current_user.has_role?(:admin) && !params[:category_id].blank?
+
         @articles = Article.where(category_id: params[:category_id]).paginate(:page => params[:page], :per_page => 10)
         @category = Category.find(params[:category_id])
 
     elsif current_user.has_role?(:admin) && params[:active]=="false"
 
        @articles = Article.where.not(:active=>true).paginate(:page => params[:page], :per_page => 10)
+   
     else
 
         if current_user.has_role?(:admin)
@@ -38,18 +40,18 @@ class ArticlesController < BaseController
 
   # GET /articles/new
   def new
+
     @article = Article.new
     @article.pictures.build
-     @categories = Category.list.sort{|x,y| x.title <=> y.title}
-     @article.category_id ||= params[:category_id]
-
+    @categories = Category.list.sort{|x,y| x.title <=> y.title}
+    @article.category_id ||= params[:category_id]
 
   end
 
   # GET /articles/1/edit
   def edit
     @article.pictures.build
-     @categories = Category.list.sort{|x,y| x.title <=> y.title}
+    @categories = Category.list.sort{|x,y| x.title <=> y.title}
   end
 
   # POST /articles
@@ -62,19 +64,20 @@ class ArticlesController < BaseController
       @article.category = Category.uncategorized
     end
 
-    if current_user.has_role? :columnist
+    if current_user.has_role?(:columnist)
       @article.active = false
     end
 
-      if @article.save
-        current_user.articles << @article
-        redirect_to admin_article_path(@article), flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
+    if @article.save
+      current_user.articles << @article
+      redirect_to admin_article_path(@article), flash: {success: "<i class=\"icon-ok\"></i> Haber başarıyla oluşturuldu.".html_safe}
 
-      else
+    else
+
       @article.pictures.build
-     render action: 'new'
+      render action: 'new'
 
-      end
+    end
     
   end
 
