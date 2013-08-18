@@ -64,6 +64,12 @@ Create a Heroku application:
 heroku create
 ```
 
+You should enable user env compile:
+
+```console
+heroku labs:enable user-env-compile -a YOUR_APP
+```
+
 You should set ENV variables at Heroku. Fourtanetly, you can do it easily with Figaro gem:
 
 ```console
