@@ -11,6 +11,7 @@ git clone https://github.com/scaryguy/enews.git
 cd enews
 bundle install
 ```
+> You should set up your `database.yml` properly. PostgreSQL is recommended as your database.
 
 You should create `config/application.yml` and define your ENV variables inside it.
 
@@ -31,14 +32,11 @@ ROLES:
   - admin
   - user
   - editor
+  - columnist
 UNCATEGORIZED: <here comes UNCATEGORIZED category title>
-development:
-  AWS_BUCKET: <here comes AWS bucket name>
-  AWS_ACCESS_KEY_ID: <here comes AWS access key ID>
-  AWS_SECRET_ACCESS_KEY: <here comes AWS secret access key>
-  DEV_DB_NAME: <here comes development DB name>
-  DEV_DB_USERNAME: <here comes development DB username>
-  DEV_DB_PASSWORD: <here comes development DB password>
+AWS_BUCKET: <here comes AWS bucket name>
+AWS_ACCESS_KEY_ID: <here comes AWS access key ID>
+AWS_SECRET_ACCESS_KEY: <here comes AWS secret access key>
 ```
 
 Setup DB to create necessary DB structure:
