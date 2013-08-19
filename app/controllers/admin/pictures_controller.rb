@@ -33,6 +33,9 @@ class Admin::PicturesController < ApplicationController
 
   def edit
   	@picture = Picture.find(params[:id])
+    @galleries = Gallery.select { |x| !x.pictures.include?(@picture)}
+    @current_galleries = @picture.galleries
+    @selectable = true
   end
 
   def update
@@ -55,6 +58,30 @@ class Admin::PicturesController < ApplicationController
     else
        redirect_to admin_pictures_path, flash: { success: "<i class=\"icon-ok\"></i> Görsel silindi.".html_safe}
     end
+  end
+
+  def select_gallery_for_picture
+    @gallery = Gallery.find(params[:id])
+    @picture = Picture.find(params[:picture_id])
+    if @picture.galleries << @gallery
+      @okay = true
+    end
+
+  end
+
+  def remove_gallery_for_picture
+    @gallery = Gallery.find(params[:id])
+    @picture = Picture.find(params[:picture_id])
+    if @picture.galleries.delete(@gallery)
+      @okay = true
+    end
+
+  end
+
+  def selectable_galleries
+    @picture = Picture.find(params[:id])
+    @galleries = Gallery.select { |x| !x.pictures.include?(@picture)}
+    @selectable = true
   end
 
   private

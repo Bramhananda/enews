@@ -7,7 +7,7 @@
 <%= link_to 'Yeni galeri', new_admin_gallery_path, class: "btn btn-success", style: "margin-bottom: 10px"%>
 <%= link_to 'Tüm görseller', admin_pictures_path, class: "btn btn-warning", style: "margin-bottom: 10px"%>
 	</div>
-	<%= render 'admin/galleries/galleries_grid', :galleries_array=>@galleries %>
+	<%= render 'admin/galleries/galleries_grid', :galleries_array=>@galleries, :selectable=>@selectable %>
 
 
 </div>

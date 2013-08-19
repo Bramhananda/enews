@@ -1,13 +1,26 @@
 <% galleries_array.each do |t| %>
 
-	<div class="span4 widget-container-span"><div class="widget-box">
+	<div class="span4 widget-container-span" id="gallery_cont-<%= t.id %>"><div class="widget-box">
 			<div class="widget-header">
 				<h1>&nbsp;</h1>
 
 				<span class="widget-toolbar">
+				<% if selectable %>
+						<% if @picture.galleries.include?(t) %>
+							<%= link_to admin_remove_gallery_for_picture_path(t, @picture.id), remote: true, method: :post, id: "remove-#{t.id}" do %>
+								<i class="icon-remove"></i>
+							<% end %>
+						<% else %>
+							<%= link_to admin_select_gallery_for_picture_path(t, @picture.id), remote: true, method: :post, id: "select-#{t.id}" do %>
+								<i class="icon-ok"></i>
+							<% end %>
+						<% end %>
+				<% else %>
+
 					<%= link_to admin_gallery_path(t), :method=>:delete, confirm: "Galeriyi silmek istediğinize emin misiniz?" do %>
 						<i class="icon-remove"></i>
 					<% end %>
+				<% end %>
 				</span>
 			</div>
 	

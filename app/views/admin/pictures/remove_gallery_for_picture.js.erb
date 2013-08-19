@@ -1,0 +1,18 @@
+<% if @okay %>
+$('#gallery_cont-<%= params[:id] %>').prepend('<div class=\"alert alert-success\"><i class="icon-ok"></i> Resim galeriden silindi.</div>')
+
+	setTimeout(function() {
+
+		$('.alert-success').slideUp();
+		$('#gallery_cont-<%= params[:id] %>').find('.icon-remove').attr('class','icon-ok')
+		$('#gallery_cont-<%= params[:id] %>').find('#remove-<%= params[:id] %>').attr('href','<%= admin_select_gallery_for_picture_path(params[:id], @picture.id)%>').attr('id','select-<%= params[:id] %>')
+		$('#gallery_cont-<%= params[:id] %>').appendTo($('#gallery-holder'));
+	}, 2000);
+<% else %>
+$('#gallery_cont-<%= params[:id] %>').prepend('<div class=\"alert alert-error\"><i class="icon-remove"></i> Resim galeriden silinemedi.</div>')
+setTimeout(function() {
+
+		$('.alert-error').slideUp();
+
+	}, 2000);
+<% end %>

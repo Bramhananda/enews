@@ -1,0 +1,20 @@
+<% if @okay %>
+$('#gallery_cont-<%= params[:id] %>').prepend('<div class=\"alert alert-success\"><i class="icon-ok"></i> Resim galeriye eklendi.</div>')
+$('#gallery_cont-<%= params[:id] %>').find('.widget-main').css('background-color', '#f5f5f5')
+	setTimeout(function() {
+
+		$('.alert-success').slideUp();
+		$('#gallery_cont-<%= params[:id] %>').find('.icon-ok').attr('class','icon-remove')
+
+		$('#gallery_cont-<%= params[:id] %>').find('#select-<%= params[:id] %>').attr('href','<%= admin_remove_gallery_for_picture_path(params[:id], @picture.id)%>')
+		$('#gallery_cont-<%= params[:id] %>').appendTo($('#current-gallery-holder'));
+
+	}, 2000);
+<% else %>
+$('#gallery_cont-<%= params[:id] %>').prepend('<div class=\"alert alert-error\"><i class="icon-remove"></i> Resim galeriye eklenemedi.</div>')
+setTimeout(function() {
+
+		$('.alert-error').slideUp();
+
+	}, 2000);
+<% end %>
