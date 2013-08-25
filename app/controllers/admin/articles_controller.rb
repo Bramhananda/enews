@@ -58,7 +58,7 @@ class ArticlesController < BaseController
   # POST /articles.json
   def create
 
-    @article = Article.new(article_params)
+    @article = Article.new(params.require(:article).permit(:title, :content, :publish_date, :category_id, :active, :tag_list, pictures_attributes: [:image]))
 
     if article_params[:category_id].blank?
       @article.category = Category.uncategorized

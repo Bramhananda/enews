@@ -59,8 +59,13 @@ class CategoriesController < BaseController
   def destroy
 
     if @category.articles.blank?
-      @category.destroy
+      if @category.title == ENV['UNCATEGORIZED']
+        edirect_to admin_categories_url, flash: {error: "<i class=\"icon-remove\"></i> #{ENV['UNCATEGORIZED']} özel bir kategoridir ve silinemez.".html_safe}
+    else
+        @category.destroy
+
       redirect_to admin_categories_url, flash: {success: "<i class=\"icon-ok\"></i> Kategori başarıyla silindi.".html_safe}
+    end
     else
       redirect_to admin_categories_url, flash: {error: "<i class=\"icon-remove\"></i> İçinde haber bulunan kategoriyi silemezsiniz. Lütfen öncelikle bu kategoriye ait haberleri siliniz.".html_safe}
     end

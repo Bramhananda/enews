@@ -18,7 +18,7 @@
 <div class="field">
    <%= f.label :parent_id, "Üst kategori" %>
 
-     <%=  select_tag 'category[parent_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" })%>
+     <%=  select_tag 'category[parent_id]', options_for_select(nested_set_options(@categories) {|i| "#{'-' * i.level} #{i.title}" }), :prompt => "Kategori seçiniz..."%>
 </div>
   <div class="form-actions center">
     <%= f.submit "Kaydet",  :class=> "btn btn-success span2" %>

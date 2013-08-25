@@ -17,10 +17,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 gem 'cancan'
-gem 'devise'
+gem 'devise', '3.1.0.rc2'
 gem 'figaro'
 gem 'pg'
-gem 'protected_attributes'
 gem 'rolify'
 gem 'acts-as-taggable-on'
 gem 'rack-mini-profiler'

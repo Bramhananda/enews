@@ -1,5 +1,5 @@
 class Gallery < ActiveRecord::Base
-	attr_accessible :title, :description, :pictures_attributes
+	#attr_accessible :title, :description, :pictures_attributes
 	validates :title, presence: true
 	has_many :multimedia
 	has_many :pictures, :through=>:multimedia

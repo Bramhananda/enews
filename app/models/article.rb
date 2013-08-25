@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   before_validation :set_default_category
 
   acts_as_taggable
-  attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes, :category, :active
+  #attr_accessible :title, :content, :publish_date, :category_id, :tag_list, :pictures_attributes, :category, :active
 
   belongs_to :category
   belongs_to :user
